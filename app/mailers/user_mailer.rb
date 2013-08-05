@@ -13,6 +13,6 @@ class UserMailer < ActionMailer::Base
     host = "http://localhost:3000/users"
     verify = Digest::MD5.hexdigest(user.email)
     @url = host  + "&"  + verify
-    mail(to: 'group1.framgia@gmail.com', subject: "Please active new user.")
+    mail(to: 'group1.framgia@gmail.com', subject: "Active new user.")
   end
 end

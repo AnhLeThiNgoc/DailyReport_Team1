@@ -1,5 +1,12 @@
-<% if signed_in? %>
-  <h2>Trang Admin hoặc User sẽ ở đây</h2>
+<% if current_user.admin? %>
+  <!-- Single button -->
+	<ul class="nav nav-tabs">
+	  <li class="active"><a href="#">Home</a></li>
+	  <li><a href="home">User</a></li>
+	  <li><a href="welcome">Group</a></li>
+	  <li><a href="#">Report</a></li>
+	</ul>
+
 <% else %>
-  <h2>Đang sử lý khi User chưa đăng nhập sẽ chuyển sang trang đăng nhập</h2>
+  HUHU
 <% end %>

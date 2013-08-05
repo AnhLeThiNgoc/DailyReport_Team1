@@ -8,7 +8,12 @@ module SessionsHelper
   def signed_in?
     !current_user.nil?
   end
-  
+
+  #Kiem tra xem user duoc active chua
+  def signed_in_active?
+    current_user.active == false
+  end
+
   def current_user=(user)
     @current_user = user
   end

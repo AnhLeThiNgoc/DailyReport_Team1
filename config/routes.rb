@@ -1,21 +1,22 @@
 DailyReportTeam1::Application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  
-  root to: 'static_pages#home'
+
+  root to: 'sessions#new'
 
   get "users/new"
-  
+
   # match '/signup',  to: 'users#new'
-  match '/signin',  to: 'sessions#new'
-  match '/signout', to: 'sessions#destroy', via: :delete 
-  match '/signup',  to: 'users#new',  via: 'get'
-  # match '/index',   to: 'static_pages#index', via: 'get'
-  # match '/home',   to: 'static_pages#home',   via: 'get'
+  # match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signup',  to: 'users#new'
+  match '/signin', to: 'sessions#new'
   match '/help',    to: 'static_pages#help',    via: 'get'
   match '/about',   to: 'static_pages#about',   via: 'get'
+  match '/home',    to: 'static_pages#home',     via: 'get'
+  match '/welcome', to: 'sessions#welcome',     via: 'get'
   match '/users&:active', to: 'users#active', as: '/users/active', via: 'get'
-  
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

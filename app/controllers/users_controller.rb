@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user, only: [:edit, :update, :destroy]
+  before_filter :signed_in_user, only: [:edit, :update, :destroy, :show]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: [:destroy]
 
@@ -10,18 +10,16 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-  
+
   def create
     @user = User.new(params[:user])
+    @user[:name] = @user[:email].split('@')[0]
     if @user.save
       # sign_in @user
       UserMailer.active_user(@user).deliver
       UserMailer.welcome_email(@user).deliver
-
-      redirect_to root_url
-
       flash[:success] = "Welcome to the Daily Report!"
-      
+      redirect_to welcome_path
     else
       render 'new'
     end
@@ -58,7 +56,7 @@ class UsersController < ApplicationController
     end
     redirect_to root_url
   end
-  
+
   private
 
     def signed_in_user

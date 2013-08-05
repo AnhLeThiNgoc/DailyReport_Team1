@@ -1,11 +1,14 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="navbar-inner">
     <div class="container">
-      <%= link_to "Daily Report", root_url, id: "logo" %>
+      <% if signed_in? %>
+        <%= link_to "Daily Report", home_path, id: "logo" %>
+      <% else %>
+        <%= link_to "Daily Report", root_path, id: "logo" %>
+      <% end %>
       <nav>
         <ul class="nav pull-right">
           <% if signed_in? %>
-            <li><%= link_to "Home", root_url %></li>
             <li><%= link_to "#{current_user[:name]}", current_user %></li>
             <li id="fat-menu" class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
