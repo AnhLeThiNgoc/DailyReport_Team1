@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user, only: [:edit, :update, :destroy]
   before_filter :correct_user,   only: [:edit, :update]
-  before_filter :admin_user,     only: :destroy
+  before_filter :admin_user,     only: [:destroy]
 
   def show
     @user = User.find(params[:id])
@@ -13,11 +13,15 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
-    @user[:name] = @user[:email].split('@')[0]
     if @user.save
       # sign_in @user
-      flash[:success] = "Welcome to the Daily Report!"
+      UserMailer.active_user(@user).deliver
+      UserMailer.welcome_email(@user).deliver
+
       redirect_to root_url
+
+      flash[:success] = "Welcome to the Daily Report!"
+      
     else
       render 'new'
     end
@@ -42,6 +46,17 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User destroyed."
     redirect_to users_url
+  end
+
+  def active
+    users = User.where("active = ?", false)
+    users.each do |user|
+      if Digest::MD5.hexdigest(user.email) == params[:active]
+        user.active = true
+        user.save
+      end
+    end
+    redirect_to root_url
   end
   
   private
