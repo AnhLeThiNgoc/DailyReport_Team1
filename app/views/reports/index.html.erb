@@ -1,0 +1,42 @@
+<h1>Listing reports</h1>
+
+<table class = "table table-bordered">
+  <thead>
+    <tr>
+      <th> Date </th>
+      <% @catalogs.each do |catalog| %>
+        <th><%= catalog.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+   <td><%= @report.date %></td>
+   <td><%= @detail.content %></td>
+   <td><%= @detail.content %></td>
+    </tr>
+  </tbody>
+</table>
+<table>
+  <tr>
+    <th>User</th>
+    <th>Date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @reports.each do |report| %>
+  <tr>
+    <td><%= report.user_id %></td>
+    <td><%= report.date %></td>
+    <td><%= link_to 'Show', report %></td>
+    <td><%= link_to 'Edit', edit_report_path(report) %></td>
+    <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Report', new_report_path %>

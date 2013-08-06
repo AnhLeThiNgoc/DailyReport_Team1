@@ -1,0 +1,29 @@
+<%= form_for(@detail) do |f| %>
+  <% if @detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@detail.errors.count, "error") %> prohibited this detail from being saved:</h2>
+
+      <ul>
+      <% @detail.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :catalog_id %><br />
+    <%= f.number_field :catalog_id %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content, placeholder: "Compose new detail..." %>
+  </div>
+
+  <%= f.file_field :picture %>
+ <!--  <div class = "actions">
+  <%#= f.submit "Post", class: "btn btn-large btn-primary" %>
+</div> -->
+ <div class="actions">
+    <%= f.submit "Create Detail", class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>

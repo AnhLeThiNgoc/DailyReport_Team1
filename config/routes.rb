@@ -1,4 +1,13 @@
 DailyReportTeam1::Application.routes.draw do
+  resources :details
+
+
+  resources :catalogs
+
+
+  resources :reports
+
+
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
 
